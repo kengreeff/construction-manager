@@ -24,6 +24,8 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
+    @project.organization_ids = current_user.organization_ids&.first
+    authorize @project
 
     respond_to do |format|
       if @project.save
@@ -68,5 +70,9 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       params.fetch(:project, {})
+        .permit(
+          :is_master,
+          :title,
+        )
     end
 end

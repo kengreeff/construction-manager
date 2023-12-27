@@ -8,6 +8,10 @@ class ProjectPolicy < ApplicationPolicy
     admin? || project_owner?
   end
 
+  def create?
+    project_owner?
+  end
+
   class Scope < Scope
     def resolve
       if @user.admin?
