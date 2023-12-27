@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   before_action :set_current_request_details
   before_action :authenticate
 
@@ -9,6 +11,10 @@ class ApplicationController < ActionController::Base
       else
         redirect_to sign_in_path
       end
+    end
+
+    def current_user
+      Current.user
     end
 
     def set_current_request_details

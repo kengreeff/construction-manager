@@ -25,4 +25,12 @@ class User < ApplicationRecord
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
   end
+
+  def admin?
+    self.role&.key == 'admin'
+  end
+
+  def organization_user?
+    self.role&.key == 'organization_user'
+  end
 end
