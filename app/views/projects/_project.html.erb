@@ -1,60 +1,17 @@
 <div id="<%= dom_id project %>" class="rounded-lg border bg-white text-card-foreground shadow-sm">
   <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="w-8 h-8"
-    >
-      <path d="M5 7 3 5"></path>
-      <path d="M9 6V3"></path>
-      <path d="m13 7 2-2"></path>
-      <circle cx="9" cy="13" r="3"></circle>
-      <path d="M11.83 12H20a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h2.17"></path>
-      <path d="M16 16h2"></path>
-    </svg>
     <div class="grid gap-1">
       <h3 class="text-2xl font-semibold leading-none tracking-tight">
         <%= link_to project.title, project %>
       </h3>
-      <div class="inline-flex rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-3.5 w-3.5 -translate-x-1"
-        >
-          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
-        </svg>
-        In Progress
-      </div>
-    </div>
-  </div>
-  <div class="p-6 grid gap-2">
-    <div class="text-sm font-semibold">Progress:</div>
-    <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-      <div class="h-full bg-blue-500" style="width:75%"></div>
-    </div>
-    <div class="text-sm font-semibold">Team Members:</div>
-    <div class="flex items-center -space-x-1 [&amp;>span]:ring-4 [&amp;>span]:ring-white dark:[&amp;>span]:ring-gray-950">
-      <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-        <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">M1</span>
-      </span>
-      <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-        <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">M2</span>
-      </span>
+      
+      <h4>
+        <% if project.is_master %>
+          Client Name
+        <% else %>
+          <%= link_to project.parent_project.title, project.parent_project %>
+        <% end %>
+      </h4>
     </div>
   </div>
 </div>

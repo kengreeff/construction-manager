@@ -24,7 +24,21 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
-    @project.organization_ids = current_user.organization_ids&.first
+    
+    result = Projects::SetupNewProject.new({
+      current_user: current_user,
+      project: @project,
+    }).perform
+
+    if !result[:success]
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: result[:errors], status: :unprocessable_entity }
+      end
+      return
+    end
+
+    @project = result[:data]
     authorize @project
 
     respond_to do |format|
