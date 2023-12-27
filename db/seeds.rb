@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Create roles
+roles = [
+  { title: "Admin", key: "admin" },
+  { title: "Organization User", key: "organization_user" },
+  { title: "User", key: "user" },
+]
+
+roles.each do |role|
+  Role.find_or_create_by(key: role[:key]) do |r|
+    r.title = role[:title]
+  end
+end
