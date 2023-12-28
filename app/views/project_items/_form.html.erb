@@ -1,0 +1,121 @@
+<%= form_with(model: project_item, class: "w-full", data: { controller: "project-items--form" }) do |form| %>
+  <% if project_item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(project_item.errors.count, "error") %> prohibited this project_item from being saved:</h2>
+
+      <ul>
+        <% project_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Category", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.select(
+        :category_id,
+        categories.map { |category| [category.title, category.id] },
+        { include_blank: "Please Select..." },
+        { class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" }
+      ) %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Title", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :title, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3 mb-2 md:mb-0">
+      <%= form.label "Supplier", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.select(
+        :supplier_id,
+        suppliers.map { |supplier| [supplier.title, supplier.id] },
+        { include_blank: "Please Select..." },
+        {
+          class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+          data: {
+            action: "project-items--form#supplierChanged",
+          }
+        }
+      ) %>
+      <%= form.text_field(
+        :supplier_title,
+        class: "hidden appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+        data: { "project-items--form-target": "supplierInput" }
+      ) %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+      <%= form.label "Internal Code", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :internal_code, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <div class="w-full md:w-1/2 px-3">
+      <%= form.label "Product Code", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :product_code, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+      <%= form.label "Quantity", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :quantity, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <div class="w-full md:w-1/2 px-3">
+      <%= form.label "Unit Price", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.number_field :unit_price, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Finish", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :finish, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Material", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :material, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Colour", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :colour, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "URL", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.url_field :url, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Description", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_area :description, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <%= form.hidden_field :project_id, value: project_item.project_id || params[:project_id] %>
+    <%= form.hidden_field :project_space_id, value: project_item.project_space_id || params[:space_id] %>
+
+    <%= link_to "Back to #{project_item.project_space&.title}", project_space_path(project_item.project_id, project_item.project_space_id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <%= form.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
+  </div>
+<% end %>

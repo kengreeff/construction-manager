@@ -7,7 +7,7 @@
     <div class="space-y-1.5 p-6 flex flex-col gap-4">
       <div class="grid gap-1">
         <h3 class="text-2xl font-semibold leading-none tracking-tight">
-          Sub Projects
+          Projects
         </h3>
       </div>
 
@@ -16,7 +16,7 @@
           <thead class="[&amp;_tr]:border-b">
             <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
               <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[300px]">
-                Project
+                Title
               </th>
               <th class="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
                 Actions
@@ -28,9 +28,10 @@
             <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
               <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
                 <%= link_to sub_project.title, sub_project %>
+                (<%= "#{sub_project.project_spaces.count} " + "Space".pluralize(sub_project.project_spaces.count) %>)
               </td>
               <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">
-                $500,000
+                <%= link_to "Manage", sub_project %>
               </td>
             </tr>
             <% end %>

@@ -1,0 +1,13 @@
+<div class="flex flex-col">
+  <p style="color: green"><%= notice %></p>
+
+  <%= render @project_space %>
+
+  <% @categories.each do |category| %>
+  <%= render partial: "project_spaces/category_group", locals: { category: category, project_space: @project_space } %>
+  <% end %>
+
+  <div>
+    <%= button_to "Delete this space", @project_space, method: :delete %>
+  </div>
+</div>

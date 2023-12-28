@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Project spaces</h1>
+
+<div id="project_spaces">
+  <% @project_spaces.each do |project_space| %>
+    <%= render project_space %>
+    <p>
+      <%= link_to "Show this project space", project_space_path(project_space, project_space) %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New project space", new_project_space_path %>

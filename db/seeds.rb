@@ -8,7 +8,20 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# Create roles
+# Categories
+categories = [
+  { title: "Finishes & Colours", key: "finishes", category_type: "ProjectItem" },
+  { title: "Fixture Fittings & Equipment", key: "fixtures", category_type: "ProjectItem" },
+]
+
+categories.each do |category|
+  Category.find_or_create_by(key: category[:key]) do |r|
+    r.title = category[:title]
+    r.category_type = category[:category_type]
+  end
+end
+
+# Roles
 roles = [
   { title: "Admin", key: "admin" },
   { title: "Organization User", key: "organization_user" },
@@ -19,4 +32,13 @@ roles.each do |role|
   Role.find_or_create_by(key: role[:key]) do |r|
     r.title = role[:title]
   end
+end
+
+# Suppliers
+suppliers = [
+  { title: "Other" },
+]
+
+suppliers.each do |supplier|
+  Supplier.find_or_create_by(title: supplier[:title])
 end

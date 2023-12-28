@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_27_022956) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_28_034152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "key", null: false
+    t.string "category_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "clients", force: :cascade do |t|
     t.bigint "organization_id"
@@ -65,6 +73,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_022956) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.string "internal_code"
+    t.decimal "unit_price", precision: 8, scale: 2
+    t.string "finish"
+    t.string "material"
+    t.string "colour"
+    t.bigint "project_id"
+    t.index ["category_id"], name: "index_project_items_on_category_id"
+    t.index ["project_id"], name: "index_project_items_on_project_id"
     t.index ["project_space_id"], name: "index_project_items_on_project_space_id"
     t.index ["supplier_id"], name: "index_project_items_on_supplier_id"
   end
@@ -121,6 +138,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_022956) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "project_items", "categories"
+  add_foreign_key "project_items", "projects"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "roles"
 end

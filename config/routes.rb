@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :project_items
   # Authentication
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
@@ -20,5 +21,10 @@ Rails.application.routes.draw do
   root "home#index"
 
   # Projects
-  resources :projects
+  resources :projects do
+    # Spaces
+    resources :spaces, controller: "project_spaces" do
+      resources :items, controller: "project_items"
+    end
+  end
 end

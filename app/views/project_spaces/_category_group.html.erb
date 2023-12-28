@@ -1,0 +1,18 @@
+<h4 class="text-xl font-semibold leading-none tracking-tight mt-8">
+  <%= category.title %>
+</h4>
+
+<% project_space.project_items.where(category: category).each do |project_item| %>
+<%= render partial: "project_items/project_item", locals: { project_item: project_item } %>
+<% end %>
+
+<div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+  <div class="space-y-1.5 p-6 flex flex-col items-end gap-4">
+    <a
+      class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+      href="<%= new_project_space_item_path(project_space.project, project_space, category_id: category.id) %>"
+    >
+      Add to <%= category.title %>
+    </a>
+  </div>
+</div>

@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--color-primary: 0 0 0;
+		--color-primary-foreground: 255 255 255;
+		--color-text: 33 33 33;
+		--color-success: 0 200 81;
+		--color-info: 51 181 229;
+		--color-warn: 255 187 51;
+		--color-error: 254 78 78;
+	}
+
+	:root[class~="dark"] {
+		--color-primary: 247 147 34;
+		--color-primary-foreground: 0 0 0;
+		--color-text: 33 33 33;
+		--color-success: 0 200 81;
+		--color-info: 51 181 229;
+		--color-warn: 255 187 51;
+		--color-error: 254 78 78;
+	}
+}
