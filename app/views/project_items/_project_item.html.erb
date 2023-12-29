@@ -1,115 +1,118 @@
 <div id="<%= dom_id project_item %>" class="rounded border text-card-foreground bg-white shadow-sm mt-4">
-  <div class="border-b space-y-1.5 p-6 flex flex-col gap-2">
-    <div class="grid gap-1">
-      <h4 class="text-lg font-semibold leading-none tracking-tight">
-        <%= project_item.title %>
-      </h4>
+  <div class="border-b flex flex-col">
+    <div class="flex items-center justify-between border-b p-4">
+      <div class="flex items-center gap-4">
+        <div class="flex border items-center justify-center rounded-lg w-16 h-16">
+          Image
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <h4 class="text-lg font-semibold leading-none tracking-tight">
+            <%= project_item.title %>
+          </h4>
+
+          <span class="text-sm">
+            <%=
+              if project_item.supplier
+                string = project_item.supplier.title
+                string += " | #{project_item.description.truncate(45)}" if project_item.description.present?
+                string
+              else
+                string = project_item.material
+                string += " | #{project_item.finish}" if project_item.finish.present?
+                string
+              end
+            %>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex items-center text-sm gap-4">
+        <%= link_to "Edit", edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item.id) %>
+        <%= render partial: "statuses/status_pill", locals: { status: project_item.status } %>
+      </div>
     </div>
 
-    <div class="flex flex-col">
-      <% if project_item.description.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
-          Description
-        </span>
-
-        <span class="text-sm">
-          <%= project_item.description %>
-        </span>
-      </div>
-      <% end %>
-
-      <% if project_item.supplier.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
-          Supplier
-        </span>
-
-        <span class="text-sm">
-          <%= project_item.supplier&.title %>
-        </span>
-      </div>
-      <% end %>
-      
+    <div class="grid grid-cols-1 md:grid-cols-2 p-4 gap-2">      
       <% if project_item.quantity.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Quantity
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.quantity %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.colour.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Colour
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.colour %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.finish.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Finish
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.finish %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.material.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Material
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.material %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.internal_code.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Internal Code
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.internal_code %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.product_code.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           Product Code
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= project_item.product_code %>
         </span>
       </div>
       <% end %>
 
       <% if project_item.url.present? %>
-      <div class="flex flex-col md:flex-row mt-2">
-        <span class="col-span-1 text-sm font-semibold text-gray-500 w-48">
+      <div class="flex flex-col md:flex-row text-sm">
+        <span class="col-span-1 font-semibold text-gray-400 w-48">
           URL
         </span>
 
-        <span class="text-sm">
+        <span>
           <%= link_to project_item.url.truncate(50), project_item.url %>
         </span>
       </div>

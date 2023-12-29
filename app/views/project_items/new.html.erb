@@ -1,8 +1,3 @@
-<%
-  categories = Category.where(category_type: "ProjectItem").order(title: :asc)
-  suppliers = Supplier.all.order(title: :asc)
-%>
-
 <div class="flex flex-col">
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
     <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
@@ -17,9 +12,10 @@
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
     <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
       <%= render partial: "project_items/form", locals: {
-        categories: categories,
+        categories: Category.where(category_type: "ProjectItem").order(title: :asc),
         project_item: @project_item,
-        suppliers: suppliers,
+        suppliers: Supplier.all.order(title: :asc),
+        statuses: Status.all.order(title: :asc),
       } %>
     </div>
   </div>

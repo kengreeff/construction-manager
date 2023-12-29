@@ -1,0 +1,12 @@
+<%
+  status_colours = {
+    "approved" => "#4ade80",
+    "draft" => "#2dd4bf",
+    "in_review" => "#fda4af",
+    "shortlist" => "#93c5fd",
+  }
+%>
+
+<div class="bg-[--status-color] text-white rounded-lg px-3 py-1" style="--status-color: <%= status_colours[status&.key || "draft"] %>;">
+  <%= status&.title || "Draft" %>
+</div>

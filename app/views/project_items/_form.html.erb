@@ -111,6 +111,22 @@
     </div>
   </div>
 
+
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+      <%= form.label "Status", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.select(
+        :status_id,
+        statuses.map { |status| [status.title, status.id] },
+        { include_blank: "Please Select..." },
+        {
+          class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+        }
+      ) %>
+    </div>
+  </div>
+
   <div class="flex justify-end">
     <%= form.hidden_field :project_id, value: project_item.project_id || params[:project_id] %>
     <%= form.hidden_field :project_space_id, value: project_item.project_space_id || params[:space_id] %>

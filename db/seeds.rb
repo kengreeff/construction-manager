@@ -42,3 +42,17 @@ suppliers = [
 suppliers.each do |supplier|
   Supplier.find_or_create_by(title: supplier[:title])
 end
+
+# Statuses
+statuses = [
+  { title: "Approved", key: "approved" },
+  { title: "Draft", key: "draft" },
+  { title: "In Review", key: "in_review" },
+  { title: "Shortlist", key: "shortlist" },
+]
+
+statuses.each do |status|
+  Status.find_or_create_by(key: status[:key]) do |s|
+    s.title = status[:title]
+  end
+end

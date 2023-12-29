@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_28_034152) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_29_015849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,9 +80,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_034152) do
     t.string "material"
     t.string "colour"
     t.bigint "project_id"
+    t.bigint "approved_by_user_id"
+    t.datetime "approved_at"
+    t.bigint "status_id"
     t.index ["category_id"], name: "index_project_items_on_category_id"
     t.index ["project_id"], name: "index_project_items_on_project_id"
     t.index ["project_space_id"], name: "index_project_items_on_project_space_id"
+    t.index ["status_id"], name: "index_project_items_on_status_id"
     t.index ["supplier_id"], name: "index_project_items_on_supplier_id"
   end
 
@@ -118,6 +122,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_034152) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "title"
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", null: false
@@ -140,6 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_034152) do
 
   add_foreign_key "project_items", "categories"
   add_foreign_key "project_items", "projects"
+  add_foreign_key "project_items", "statuses"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "roles"
 end

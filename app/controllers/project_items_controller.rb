@@ -46,7 +46,7 @@ class ProjectItemsController < ApplicationController
   def update
     respond_to do |format|
       if @project_item.update(project_item_params)
-        format.html { redirect_to project_item_url(@project_item), notice: "Project item was successfully updated." }
+        format.html { redirect_to project_space_url(@project_item.project_id, @project_item.project_space_id), notice: "Project item was successfully updated." }
         format.json { render :show, status: :ok, location: @project_item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -85,6 +85,7 @@ class ProjectItemsController < ApplicationController
           :project_id,
           :project_space_id,
           :quantity,
+          :status_id,
           :supplier_id,
           :title,
           :unit_price,
