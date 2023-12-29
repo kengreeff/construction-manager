@@ -3,6 +3,18 @@
 
   <%= render @project_space %>
 
+  <h4 class="text-xl font-semibold leading-none tracking-tight mt-8">
+    Inspiration
+  </h4>
+
+  <div class="rounded border text-card-foreground bg-white shadow-sm mt-4">
+    <div class="border-b grid grid-flow-col auto-cols-max p-4 gap-4">
+      <% @project_space.images.each do |image| %>
+      <img class="rounded-lg w-32 h-32" src="<%= url_for(image) %>" />
+      <% end %>
+    </div>
+  </div>
+
   <% @categories.each do |category| %>
   <%= render partial: "project_spaces/category_group", locals: { category: category, project_space: @project_space } %>
   <% end %>

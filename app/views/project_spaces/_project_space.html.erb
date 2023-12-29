@@ -1,5 +1,5 @@
 <div id="<%= dom_id project_space %>" class="rounded-lg border bg-white text-card-foreground shadow-sm">
-  <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+  <div class="space-y-1.5 p-6 flex flex-row items-center justify-between gap-4">
     <div class="grid gap-1">
       <h3 class="text-2xl font-semibold leading-none tracking-tight">
         <%= link_to project_space.title, project_space.project %>
@@ -10,6 +10,10 @@
         <span> > </span>
         <%= link_to "#{project_space.project.title}", project_space.project %>
       </h4>
+    </div>
+
+    <div>
+      <%= link_to "Edit", edit_project_space_path(project_space.project_id, project_space) %>
     </div>
   </div>
 </div>

@@ -1,10 +1,23 @@
-<h1>Editing project space</h1>
+<div class="flex flex-col">
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+      <div class="grid gap-1">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight">
+          Edit Project Space
+        </h3>
+      </div>
+    </div>
+  </div>
 
-<%= render "form", project_space: @project_space %>
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+    <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+      <%= render "form", project_space: @project_space %>
+    </div>
+  </div>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this project space", @project_space %> |
-  <%= link_to "Back to project spaces", project_spaces_path %>
+  <div>
+    <%= link_to "Back to project spaces", project_spaces_path %>
+  </div>
 </div>

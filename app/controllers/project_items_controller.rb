@@ -79,6 +79,7 @@ class ProjectItemsController < ApplicationController
           :colour,
           :description,
           :finish,
+          :image,
           :internal_code,
           :material,
           :product_code,

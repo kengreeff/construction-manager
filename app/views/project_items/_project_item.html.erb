@@ -2,8 +2,10 @@
   <div class="border-b flex flex-col">
     <div class="flex items-center justify-between border-b p-4">
       <div class="flex items-center gap-4">
-        <div class="flex border items-center justify-center rounded-lg w-16 h-16">
-          Image
+        <div class="flex border items-center justify-center overflow-hidden rounded-lg w-16 h-16">
+          <% if project_item.image.attached? %>
+          <img src="<%= url_for(project_item.image) %>" />
+          <% end %>
         </div>
 
         <div class="flex flex-col gap-1">

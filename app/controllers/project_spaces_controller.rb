@@ -71,6 +71,7 @@ class ProjectSpacesController < ApplicationController
       params.fetch(:project_space, {})
         .permit(
           :title,
+          images: [],
         )
     end
 end
