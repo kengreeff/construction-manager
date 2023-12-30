@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :project_items
   # Authentication
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
@@ -20,6 +19,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
+  # Comments
+  resources :comments, only: [:create, :destroy]
+
   # Projects
   resources :projects do
     # Spaces
@@ -27,4 +29,7 @@ Rails.application.routes.draw do
       resources :items, controller: "project_items"
     end
   end
+
+  # Project Items
+  resources :project_items, only: [:create, :update]
 end

@@ -120,5 +120,17 @@
       </div>
       <% end %>
     </div>
+
+    <div class="flex flex-col border-t p-4">
+      <div id="ProjectItem-<%= project_item.id %>-comments" class="flex flex-col gap-6">
+        <% project_item.comments.order(created_at: :asc).each do |comment| %>
+        <%= render partial: "comments/comment", locals: { comment: comment } %>
+        <% end %>
+      </div>
+
+      <div class="<%= project_item.comments.size > 0 ? "mt-4" : "mt-0" %>">
+        <%= render partial: "comments/form", locals: { comment: Comment.new(record: project_item) } %>
+      </div>
+    </div>
   </div>
 </div>
