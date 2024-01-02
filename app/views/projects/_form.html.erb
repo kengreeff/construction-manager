@@ -1,11 +1,4 @@
-<%= form_with(model: project, class: "w-full max-w-lg") do |form| %>
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <%= form.label "Title", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
-      <%= form.text_field :title, class: """appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-    </div>
-  </div>
-
+<%= form_with(model: project, class: "w-full", data: { controller: "project-items--form" }) do |form| %>
   <% if project.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -18,8 +11,36 @@
     </div>
   <% end %>
 
-  <div class="flex flex-col">
-    <%= form.hidden_field :is_master, value: true %>
-    <%= form.submit class: "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+      <%= form.label "Title", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :title, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <% if (project.new_record? && !params[:parent_project_id].present?) || project.is_master %>
+    <div class="w-full px-3">
+      <%= form.label "Client", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.select(
+        :client_id,
+        clients.map { |client| [client.title, client.id] },
+        { include_blank: "Please Select..." },
+        { class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" }
+      ) %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="flex justify-end">
+    <%= form.hidden_field :is_master, value: !params[:parent_project_id].present? %>
+    <%= form.hidden_field :parent_project_id, value: params[:parent_project_id] %>
+
+    <% if project.new_record? && params[:parent_project_id].present? %>
+    <%= link_to "Back to Parent Project", project_path(params[:parent_project_id]), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <% elsif project.new_record? %>
+    <%= link_to "Back to Projects", projects_path, class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <% else %>
+    <%= link_to "Back to #{project.title}", project_path(project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <% end %>
+    <%= form.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
   </div>
 <% end %>

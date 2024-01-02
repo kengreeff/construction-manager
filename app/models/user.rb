@@ -9,6 +9,9 @@ class User < ApplicationRecord
   end
 
   belongs_to :role
+  
+  has_many :clients_users
+  has_many :clients, through: :clients_users
   has_many :organizations_users
   has_many :organizations, through: :organizations_users
   has_many :sessions, dependent: :destroy
@@ -32,5 +35,13 @@ class User < ApplicationRecord
 
   def organization_user?
     self.role&.key == 'organization_user'
+  end
+
+  def full_name
+    if self.first_name.present?
+      return "#{self.first_name} #{self.last_name}"
+    end
+
+    return "No Name Set"
   end
 end

@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.client_ids << params[:client_id] if params[:client_id]
   end
 
   # GET /projects/1/edit

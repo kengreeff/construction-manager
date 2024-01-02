@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_30_022347) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_02_025511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_022347) do
     t.index ["project_id"], name: "index_clients_projects_on_project_id"
   end
 
+  create_table "clients_users", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_clients_users_on_client_id"
+    t.index ["user_id"], name: "index_clients_users_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "record_type"
     t.bigint "record_id"
@@ -77,6 +86,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_022347) do
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id"], name: "index_comments_on_record"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "quote_id"
+    t.bigint "supplier_id", null: false
+    t.bigint "user_id", null: false
+    t.string "reference"
+    t.text "description"
+    t.decimal "total", precision: 8, scale: 2
+    t.datetime "issue_date"
+    t.datetime "due_date"
+    t.bigint "paid_by_user_id"
+    t.datetime "paid_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_invoices_on_project_id"
+    t.index ["quote_id"], name: "index_invoices_on_quote_id"
+    t.index ["supplier_id"], name: "index_invoices_on_supplier_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -146,6 +175,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_022347) do
     t.bigint "parent_project_id"
   end
 
+  create_table "quotes", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "supplier_id", null: false
+    t.bigint "user_id", null: false
+    t.string "reference"
+    t.text "description"
+    t.decimal "total", precision: 8, scale: 2
+    t.datetime "issue_date"
+    t.datetime "expiry_date"
+    t.bigint "accepted_by_user_id"
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_quotes_on_project_id"
+    t.index ["supplier_id"], name: "index_quotes_on_supplier_id"
+    t.index ["user_id"], name: "index_quotes_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "title"
     t.string "key"
@@ -192,9 +239,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_022347) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "invoices", "projects"
+  add_foreign_key "invoices", "quotes"
+  add_foreign_key "invoices", "suppliers"
+  add_foreign_key "invoices", "users"
   add_foreign_key "project_items", "categories"
   add_foreign_key "project_items", "projects"
   add_foreign_key "project_items", "statuses"
+  add_foreign_key "quotes", "projects"
+  add_foreign_key "quotes", "suppliers"
+  add_foreign_key "quotes", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "roles"
 end

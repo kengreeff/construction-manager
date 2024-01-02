@@ -2,9 +2,11 @@
   <div class="border-b flex flex-col">
     <div class="flex items-center justify-between border-b p-4">
       <div class="flex items-center gap-4">
-        <div class="flex border items-center justify-center overflow-hidden rounded-lg w-16 h-16">
+        <div class="flex bg-gray-50 border items-center justify-center overflow-hidden rounded-lg w-16 h-16 text-2xl text-gray-300">
           <% if project_item.image.attached? %>
           <img src="<%= url_for(project_item.image) %>" />
+          <% else %>
+          <%= project_item.title.first.upcase %>
           <% end %>
         </div>
 
@@ -29,8 +31,8 @@
         </div>
       </div>
 
-      <div class="flex items-center text-sm gap-4">
-        <%= link_to "Edit", edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item.id) %>
+      <div class="flex items-center text-sm gap-2">
+        <%= link_to "Edit", edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item.id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border h-7 px-2 py-1" %>
         <%= render partial: "statuses/status_pill", locals: { status: project_item.status } %>
       </div>
     </div>

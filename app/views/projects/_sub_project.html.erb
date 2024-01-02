@@ -1,14 +1,34 @@
 <div class="flex flex-col">
   <p style="color: green"><%= notice %></p>
 
-  <%= render @project %>
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="p-6 flex flex-row items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight">
+          <%= link_to @project.title, @project %>
+        </h3>
+        
+        <h4>
+          <% if @project.is_master %>
+            <%= @project.combined_clients_name %>
+          <% else %>
+            <%= link_to @project.parent_project.title, @project.parent_project %>
+          <% end %>
+        </h4>
+      </div>
+
+      <div>
+        <%= link_to "Edit Project", edit_project_path(@project), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2" %>
+      </div>
+    </div>
+  </div>
 
   <% @project.spaces.each do |project_space| %>
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
     <div class="p-6 py-4 flex flex-row items-center justify-between">
       <div class="flex flex-col">
         <h3 class="text-lg font-semibold leading-none tracking-tight">
-          <%= project_space.title %>
+          <%= link_to project_space.title, project_space_path(@project, project_space) %>
         </h3>
 
         <h4 class="text-sm leading-none tracking-tight mt-2">
@@ -35,12 +55,5 @@
         Add a Space
       </a>
     </div>
-  </div>
-
-  <div>
-    <%= link_to "Edit this project", edit_project_path(@project) %> |
-    <%= link_to "Back to projects", projects_path %>
-
-    <%= button_to "Destroy this project", @project, method: :delete %>
   </div>
 </div>

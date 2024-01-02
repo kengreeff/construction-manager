@@ -3,6 +3,7 @@
 
   <%= render @project_space %>
 
+  <% if @project_space.images.size > 0 %>
   <h4 class="text-xl font-semibold leading-none tracking-tight mt-8">
     Inspiration
   </h4>
@@ -14,12 +15,9 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
   <% @categories.each do |category| %>
   <%= render partial: "project_spaces/category_group", locals: { category: category, project_space: @project_space } %>
   <% end %>
-
-  <div>
-    <%= button_to "Delete this space", @project_space, method: :delete %>
-  </div>
 </div>

@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import ProjectItems__FormController from "./project_items/form_controller"
 application.register("project-items--form", ProjectItems__FormController)
+
+import Quotes__FormController from "./quotes/form_controller"
+application.register("quotes--form", Quotes__FormController)

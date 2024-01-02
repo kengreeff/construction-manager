@@ -1,0 +1,19 @@
+<div class="flex flex-col">
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+      <div class="grid gap-1">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight">
+          Edit User
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+    <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+      <%= render partial: "users/form", locals: {
+        user: @user,
+      } %>
+    </div>
+  </div>
+</div>

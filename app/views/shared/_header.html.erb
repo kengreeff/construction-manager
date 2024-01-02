@@ -1,46 +1,25 @@
 <header class="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-    <a class="flex items-center gap-2 text-lg font-semibold sm:text-base mr-4" href="#" rel="ugc">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="w-6 h-6"
-    >
-        <line x1="22" x2="2" y1="6" y2="6"></line>
-        <line x1="22" x2="2" y1="18" y2="18"></line>
-        <line x1="6" x2="6" y1="2" y2="22"></line>
-        <line x1="18" x2="18" y1="2" y2="22"></line>
-    </svg>
-    <span class="sr-only">Project Management</span>
-    </a>
-    <nav class="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
-    <a class="font-bold" href="<%= projects_path %>" rel="ugc">
+  <nav class="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
+    <a class="text-black dark:text-gray-400" href="<%= projects_path %>" rel="ugc">
         Projects
     </a>
-    <a class="text-gray-500 dark:text-gray-400" href="#" rel="ugc">
+    <a class="text-black dark:text-gray-400" href="<%= clients_path %>" rel="ugc">
         Clients
     </a>
-    <a class="text-gray-500 dark:text-gray-400" href="#" rel="ugc">
+    <a class="text-black dark:text-gray-400" href="#" rel="ugc">
         Users
     </a>
-    </nav>
-    <div class="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
-    <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full ml-auto">
-        <img
-        src="/placeholder.svg"
-        width="32"
-        height="32"
-        class="rounded-full border"
-        alt="Avatar"
-        style="aspect-ratio:32/32;object-fit:cover"
-        />
-        <span class="sr-only">Toggle user menu</span>
-    </button>
+  </nav>
+
+  <% if Current.user %>
+  <div class="flex items-center w-full gap-2 md:ml-auto">
+    <div class="ml-auto">
+      <%= button_to "Sign Out", Current.session, method: :delete, class: "text-sm", form_class: "inline-flex mr-2" %>
+
+      <div class="border inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
+        <%= Current.user.email.first.upcase %>
+      </div>
     </div>
+  </div>
+  <% end %>
 </header>

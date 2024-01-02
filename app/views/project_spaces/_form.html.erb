@@ -1,4 +1,4 @@
-<%= form_with(model: project_space, class: "w-full max-w-lg") do |form| %>
+<%= form_with(model: project_space, class: "w-full") do |form| %>
   <% if project_space.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(project_space.errors.count, "error") %> prohibited this project_space from being saved:</h2>
@@ -11,25 +11,31 @@
     </div>
   <% end %>
 
-  <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="flex flex-wrap -mx-3 mb-2">
     <div class="w-full px-3">
       <%= form.label "Title", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
       <%= form.text_field :title, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
     </div>
   </div>
 
-  <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="flex flex-wrap -mx-3 mb-2">
     <div class="w-full px-3">
       <%= form.label "Images", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
       <%= form.file_field :images, multiple: true, class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
     </div>
   </div>
 
-  <div>
+  <div class="flex justify-end">
     <% project_space.images.each do |image| %>
       <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
     <% end %>
 
-    <%= form.submit %>
+    <% if project_space.new_record? %>
+    <%= link_to "Back to Project", project_path(params[:project_id]), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <% else %>
+    <%= link_to "Back to #{project_space&.title}", project_space_path(project_space.project_id, project_space.id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <% end %>
+    
+    <%= form.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
   </div>
 <% end %>

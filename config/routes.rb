@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   # Authentication
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
@@ -17,19 +18,34 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "projects#index"
+
+  # Clients
+  resources :clients
 
   # Comments
   resources :comments, only: [:create, :destroy]
 
+  # Invoices
+  resources :invoices
+
   # Projects
   resources :projects do
+    # Invoice
+    resources :invoices
+
     # Spaces
     resources :spaces, controller: "project_spaces" do
       resources :items, controller: "project_items"
     end
+
+    # Quotes
+    resources :quotes
   end
 
   # Project Items
   resources :project_items, only: [:create, :update]
+
+  # Quotes
+  resources :quotes
 end

@@ -12,6 +12,10 @@ class ApplicationPolicy
     @user.admin?
   end
 
+  def organization_user?
+    @user.organization_user?
+  end
+
   def index?
     false
   end

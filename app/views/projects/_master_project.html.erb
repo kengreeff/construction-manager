@@ -1,25 +1,46 @@
 <div class="flex flex-col">
   <p style="color: green"><%= notice %></p>
 
-  <%= render @project %>
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="p-6 flex flex-row items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight">
+          <%= link_to @project.title, @project %>
+        </h3>
+        
+        <h4>
+          <% if @project.is_master %>
+            <%= @project.combined_clients_name %>
+          <% else %>
+            <%= link_to @project.parent_project.title, @project.parent_project %>
+          <% end %>
+        </h4>
+      </div>
+
+      <div>
+        <%= link_to "Edit Project", edit_project_path(@project), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2" %>
+      </div>
+    </div>
+  </div>
 
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
     <div class="space-y-1.5 p-6 flex flex-col gap-4">
-      <div class="grid gap-1">
+      <div class="flex justify-between">
         <h3 class="text-2xl font-semibold leading-none tracking-tight">
           Projects
         </h3>
+
+        <div class="flex items-center text-sm gap-4">
+          <%= link_to "Add Project", new_project_path(parent_project_id: @project.id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
+        </div>
       </div>
 
       <div class="relative w-full overflow-auto">
         <table class="w-full caption-bottom text-sm">
           <thead class="[&amp;_tr]:border-b">
             <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[300px]">
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
                 Title
-              </th>
-              <th class="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
-                Actions
               </th>
             </tr>
           </thead>
@@ -30,9 +51,6 @@
                 <%= link_to sub_project.title, sub_project %>
                 (<%= "#{sub_project.project_spaces.count} " + "Space".pluralize(sub_project.project_spaces.count) %>)
               </td>
-              <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">
-                <%= link_to "Manage", sub_project %>
-              </td>
             </tr>
             <% end %>
           </tbody>
@@ -41,10 +59,6 @@
     </div>
   </div>
 
-  <div>
-    <%= link_to "Edit this project", edit_project_path(@project) %> |
-    <%= link_to "Back to projects", projects_path %>
-
-    <%= button_to "Destroy this project", @project, method: :delete %>
-  </div>
+  <%= render partial: "projects/project_quotes", locals: { project: @project } %>
+  <%= render partial: "projects/project_invoices", locals: { project: @project } %>
 </div>
