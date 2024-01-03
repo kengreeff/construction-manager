@@ -1,14 +1,16 @@
 <header class="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
   <nav class="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
-    <a class="text-black dark:text-gray-400" href="<%= projects_path %>" rel="ugc">
-        Projects
+    <% if Current.user %>
+    <a class="text-black dark:text-gray-400" href="<%= projects_path %>">
+      Projects
     </a>
-    <a class="text-black dark:text-gray-400" href="<%= clients_path %>" rel="ugc">
-        Clients
+    <a class="text-black dark:text-gray-400" href="<%= clients_path %>">
+      Clients
     </a>
-    <a class="text-black dark:text-gray-400" href="#" rel="ugc">
-        Users
+    <a class="text-black dark:text-gray-400" href="<%= users_path %>">
+      Users
     </a>
+    <% end %>
   </nav>
 
   <% if Current.user %>

@@ -18,14 +18,14 @@
     </div>
 
     <% if (project.new_record? && !params[:parent_project_id].present?) || project.is_master %>
-    <div class="w-full px-3">
-      <%= form.label "Client", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
-      <%= form.select(
-        :client_id,
-        clients.map { |client| [client.title, client.id] },
-        { include_blank: "Please Select..." },
-        { class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" }
-      ) %>
+    <div class="w-full px-3 flex flex-col gap-1">
+      <%= form.label "Clients", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.collection_check_boxes :client_ids, clients, :id, :title do |b| %>
+        <span class="flex items-center gap-2">
+          <%= b.check_box(class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600") %>
+          <%= b.label %>
+        </span>
+      <% end %>
     </div>
     <% end %>
   </div>

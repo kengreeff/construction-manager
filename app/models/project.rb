@@ -16,9 +16,14 @@ class Project < ApplicationRecord
 
   def combined_clients_name
     if self.clients.size > 0
-      return self.clients.first.title
+      return self.clients.map { |c| c.title }.join(" / ")
     end
 
     return "No Client"
+  end
+
+  def master_project
+    return self.parent_project if !self.is_master
+    return self
   end
 end

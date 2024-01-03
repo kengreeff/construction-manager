@@ -87,7 +87,9 @@ class ProjectsController < ApplicationController
       params.fetch(:project, {})
         .permit(
           :is_master,
+          :parent_project_id,
           :title,
+          :client_ids => [],
         )
     end
 end

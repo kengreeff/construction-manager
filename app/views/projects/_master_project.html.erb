@@ -1,5 +1,5 @@
 <div class="flex flex-col">
-  <p style="color: green"><%= notice %></p>
+  <%= render partial: "shared/flash_message" %>
 
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
     <div class="p-6 flex flex-row items-center justify-between">
@@ -61,4 +61,5 @@
 
   <%= render partial: "projects/project_quotes", locals: { project: @project } %>
   <%= render partial: "projects/project_invoices", locals: { project: @project } %>
+  <%= render partial: "projects/project_clients", locals: { project: @project } %>
 </div>
