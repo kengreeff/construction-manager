@@ -1,3 +1,7 @@
+<% if params[:mood_board] == "true" %>
+<% return render partial: "projects/project_mood_board" %>
+<% end %>
+
 <% if params[:table_view] == "true" %>
 <% return render partial: "projects/project_table" %>
 <% end %>

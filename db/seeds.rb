@@ -12,6 +12,7 @@
 categories = [
   { title: "Finishes & Colours", key: "finishes", category_type: "ProjectItem" },
   { title: "Fixture Fittings & Equipment", key: "fixtures", category_type: "ProjectItem" },
+  { title: "Furniture", key: "furniture", category_type: "ProjectItem" },
 ]
 
 categories.each do |category|

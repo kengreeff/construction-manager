@@ -1,0 +1,25 @@
+<%
+  project_items = project.project_items
+    .joins(:image_attachment)
+
+  if project_items.size > 0
+%>
+
+<div class="flex flex-col gap-4">
+  <h4 class="text-xl font-semibold leading-none tracking-tight">
+    <%= link_to(project.title, project, target: "_blank") %>
+  </h4>
+
+  <div class="columns-2 md:columns-3 lg:columns-4 gap-2">
+    <% project_items.each do |project_item| %>
+      <a 
+        class="w-full aspect-auto mb-2" 
+        href="<%= edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item) %>"
+        target="_blank"
+      >
+        <img src="<%= url_for(project_item.image) %>" />
+      </a>
+    <% end %>
+  </div>
+</div>
+<% end %>

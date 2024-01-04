@@ -1,0 +1,29 @@
+<div class="flex flex-col">
+  <%= render partial: "shared/flash_message" %>
+
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="p-6 flex flex-row items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight">
+          <%= link_to @project.title, @project %>
+        </h3>
+        
+        <h4>
+          <% if @project.is_master %>
+            <%= @project.combined_clients_name %>
+          <% else %>
+            <%= link_to @project.parent_project.title, @project.parent_project %>
+          <% end %>
+        </h4>
+      </div>
+      
+      <div>
+        <%= link_to "Back to Project", project_path(@project), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2" %>
+      </div>
+    </div>
+  </div>
+
+  <%= render partial: "projects/mood_board/board", locals: {
+    project: @project,
+  } %>
+</div>

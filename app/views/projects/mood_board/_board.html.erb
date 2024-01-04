@@ -1,0 +1,7 @@
+<div class="flex flex-col gap-8 mt-8">
+  <% project.sub_projects.each do |sub_project| %>
+  <%= render partial: "projects/mood_board/sub_project", locals: {
+      project: sub_project,
+  } %>
+  <% end %>
+</div>
