@@ -35,11 +35,11 @@
     <%= form.hidden_field :parent_project_id, value: params[:parent_project_id] %>
 
     <% if project.new_record? && params[:parent_project_id].present? %>
-    <%= link_to "Back to Parent Project", project_path(params[:parent_project_id]), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <%= link_to "Go Back", project_path(params[:parent_project_id]), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
     <% elsif project.new_record? %>
-    <%= link_to "Back to Projects", projects_path, class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <%= link_to "Go Back", projects_path, class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
     <% else %>
-    <%= link_to "Back to #{project.title}", project_path(project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <%= link_to "Go Back", project_path(project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
     <% end %>
     <%= form.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
   </div>

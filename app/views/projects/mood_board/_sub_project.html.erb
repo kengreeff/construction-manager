@@ -13,7 +13,7 @@
   <div class="columns-2 md:columns-3 lg:columns-4 gap-2">
     <% project_items.each do |project_item| %>
       <a 
-        class="w-full aspect-auto mb-2" 
+        class="flex w-full aspect-auto mb-2" 
         href="<%= edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item) %>"
         target="_blank"
       >

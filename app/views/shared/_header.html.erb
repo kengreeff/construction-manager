@@ -1,5 +1,5 @@
-<header class="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-  <nav class="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
+<header class="flex items-center justify-between h-16 px-4 border-b shrink-0 md:px-6">
+  <nav class="font-medium flex flex-row items-center gap-4 md:gap-5 text-sm lg:gap-6">
     <% if Current.user %>
     <a class="text-black dark:text-gray-400" href="<%= projects_path %>">
       Projects
@@ -16,13 +16,13 @@
   </nav>
 
   <% if Current.user %>
-  <div class="flex items-center w-full gap-2 md:ml-auto">
+  <div class="flex items-center w-auto gap-2">
     <div class="ml-auto">
       <%= button_to "Sign Out", Current.session, method: :delete, class: "text-sm", form_class: "inline-flex mr-2" %>
 
-      <div class="border inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
+      <a href="<%= edit_user_path(Current.user) %>" class="border inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
         <%= Current.user.email.first.upcase %>
-      </div>
+      </a>
     </div>
   </div>
   <% end %>

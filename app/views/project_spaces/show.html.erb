@@ -9,9 +9,9 @@
   </h4>
 
   <div class="rounded border text-card-foreground bg-white shadow-sm mt-4">
-    <div class="border-b grid grid-flow-col auto-cols-max p-4 gap-4">
+    <div class="border-b grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 p-4 gap-4">
       <% @project_space.images.each do |image| %>
-      <img class="rounded-lg w-32 h-32" src="<%= url_for(image) %>" />
+      <img class="rounded-lg w-full h-full" src="<%= url_for(image) %>" />
       <% end %>
     </div>
   </div>
