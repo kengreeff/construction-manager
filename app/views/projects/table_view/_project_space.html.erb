@@ -1,0 +1,127 @@
+<% 
+  project_items = project_space.project_items
+    .joins(:category)
+    .includes(:category, :supplier)
+    .order("categories.title ASC")
+
+  total = project_items.where(status: Status.find_by(key: "approved")).reduce(0) do |acc, project_item|
+    if project_item.quantity && project_item.unit_price.present?
+      acc += project_item.quantity * project_item.unit_price
+    end
+
+    acc
+  end
+%>
+
+<% if project_items.size > 0 %>
+<h3 class="text-lg text-gray-600 font-semibold leading-none tracking-tight">
+  <%= link_to(project_space.title, project_space_path(project_space.project_id, project_space), target: "_blank") %>
+</h3>
+
+<div class="rounded-lg border bg-white text-card-foreground shadow-sm mb-4">
+  <div class="p-6 flex flex-col items-center justify-between gap-4">
+    <div class="relative w-full overflow-x-auto">
+      <table class="caption-bottom text-sm table-fixed w-fit">
+        <thead class="[&amp;_tr]:border-b">
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              Status
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              Internal Code
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Title
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Supplier
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-96">
+              Description
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Finish
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Material
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Colour
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              QTY
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              Unit Price
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              Total
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-32">
+              Product Code
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-96">
+              URL
+            </th>
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-64">
+              Category
+            </th>
+          </tr>
+        </thead>
+        <tbody class="[&amp;_tr:last-child]:border-0">
+          <% project_items.each do |project_item| %>
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <td class="p-4 align-middle">
+              <%= render partial: "statuses/status_pill", locals: { status: project_item.status } %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.internal_code.present? ? project_item.internal_code : "-" %>
+            </td>
+            <td class="p-4 align-middle font-medium">
+              <%= link_to(project_item.title, edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item), target: "_blank") %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.supplier&.title || "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.description.present? ? project_item.description : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.finish.present? ? project_item.finish : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.material.present? ? project_item.material : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.colour.present? ? project_item.colour : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.quantity || "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.unit_price.present? ? number_to_currency(project_item.unit_price) : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.quantity && project_item.unit_price.present? ? number_to_currency(project_item.quantity * project_item.unit_price) : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.product_code.present? ? project_item.product_code : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.url.present? ? link_to(project_item.url.truncate(50), project_item.url, target: "_blank") : "-" %>
+            </td>
+            <td class="p-4 align-middle">
+              <%= project_item.category.title || "-" %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="self-end">
+      <span class="font-bold">Approved Total:</span> <%= number_to_currency(total) %>
+    </div>
+  </div>
+</div>
+<% end %>

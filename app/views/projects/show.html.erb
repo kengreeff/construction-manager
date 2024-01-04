@@ -1,1 +1,9 @@
-<%= render partial: @project.is_master ? "projects/master_project" : "projects/sub_project" %>
+<% if params[:table_view] == "true" %>
+<% return render partial: "projects/project_table" %>
+<% end %>
+
+<% if @project.is_master %>
+<% return render partial: "projects/master_project" %>
+<% end %>
+
+<%= render partial: "projects/sub_project" %>

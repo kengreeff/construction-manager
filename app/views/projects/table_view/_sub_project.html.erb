@@ -1,0 +1,14 @@
+<% if project.project_items.size > 0 %>
+<div class="flex flex-col gap-4">
+  <h4 class="text-xl font-semibold leading-none tracking-tight">
+    <%= link_to(project.title, project, target: "_blank") %>
+  </h4>
+
+  <% project.spaces.each do |project_space| %>
+  <%= render partial: "projects/table_view/project_space", locals: {
+    categories: categories,
+    project_space: project_space,
+  } %>
+  <% end %>
+</div>
+<% end %>

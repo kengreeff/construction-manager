@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-8 mt-8">
+  <% project.sub_projects.each do |sub_project| %>
+  <%= render partial: "projects/table_view/sub_project", locals: {
+      categories: categories,
+      project: sub_project,
+  } %>
+  <% end %>
+</div>
