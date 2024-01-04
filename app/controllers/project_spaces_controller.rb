@@ -17,6 +17,11 @@ class ProjectSpacesController < ApplicationController
     @project_space = ProjectSpace.new
   end
 
+  # GET /project_spaces/bulk_new
+  def bulk_new
+    @project_space = ProjectSpace.new
+  end
+
   # GET /project_spaces/1/edit
   def edit
   end
@@ -34,6 +39,18 @@ class ProjectSpacesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @project_space.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def bulk_create
+    project_space_titles = params.dig(:project_space, :titles).reject { |t| t.empty? }
+    
+    project_space_titles.each do |title|
+      ProjectSpace.create!(title: title, project_id: params[:project_id])
+    end
+
+    respond_to do |format|
+      format.html { redirect_to project_url(params[:project_id]), notice: "Project spaces were successfully created." }
     end
   end
 

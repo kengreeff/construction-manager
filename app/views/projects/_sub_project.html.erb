@@ -46,8 +46,9 @@
   </div>
   <% end %>
 
-  <div class="flex justify-end rounded-lg border bg-white text-card-foreground shadow-sm mt-4 p-6 gap-2">
+  <div class="flex justify-end rounded-lg border bg-white text-card-foreground shadow-sm mt-4 p-6 gap-1">
     <%= link_to "Back to #{@project.master_project.title}", project_path(@project.master_project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
+    <%= link_to "Bulk Create", project_spaces_bulk_new_path(@project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
     <a
       class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
       href="<%= new_project_space_path(@project) %>"

@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resources :invoices
 
     # Spaces
+    get "spaces/bulk_new", to: "project_spaces#bulk_new"
+    post "spaces/bulk_create", to: "project_spaces#bulk_create"
     resources :spaces, controller: "project_spaces" do
       resources :items, controller: "project_items"
     end
