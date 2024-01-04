@@ -68,3 +68,5 @@ gem "authentication-zero", "~> 3.0"
 gem "pundit", "~> 2.3"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", require: false

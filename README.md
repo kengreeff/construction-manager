@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Credentials
 
-Things you may want to cover:
+```
+EDITOR="code --wait" bin/rails credentials:edit --environment=production
+```
 
-* Ruby version
+## Deploy
+This app is deployed to fly.io. You will need to install flyctl before using the commands below
 
-* System dependencies
+Setup infra:
 
-* Configuration
+```
+fly launch
+```
 
-* Database creation
+To deploy:
 
-* Database initialization
+```
+fly ssh console --pty -C "/rails/bin/rails console"
+```
 
-* How to run the test suite
+To use Rails Console in production:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+fly ssh console --pty -C "/rails/bin/rails console"
+```
