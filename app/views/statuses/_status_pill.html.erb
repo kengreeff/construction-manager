@@ -1,12 +1,35 @@
 <%
   status_colours = {
-    "approved" => "#4ade80",
-    "draft" => "#2dd4bf",
-    "in_review" => "#fda4af",
-    "shortlist" => "#93c5fd",
+    "approved" => {
+      "background" => "rgb(36, 161, 72)",
+      "border" => "rgb(36, 161, 72)",
+      "text" => "#ffffff",
+    },
+    "draft" => {
+      "background" => "#ffffff",
+      "border" => "#2dd4bf",
+      "text" => "#2dd4bf",
+    },
+    "in_review" => {
+      "background" => "#ffffff",
+      "border" => "#fda4af",
+      "text" => "#fda4af",
+    },
+    "shortlist" => {
+      "background" => "#ffffff",
+      "border" => "#93c5fd",
+      "text" => "#93c5fd",
+    },
   }
 %>
 
-<div class="bg-[--status-color] text-white text-center rounded-lg px-3 py-1" style="--status-color: <%= status_colours[status&.key || "draft"] %>;">
+<div
+  class="border border-[--status-border-color] bg-[--status-bg-color] text-[--status-text-color] text-center rounded-lg px-3 py-1"
+  style="
+    --status-bg-color: <%= status_colours[status&.key || "draft"]["background"] %>;
+    --status-border-color: <%= status_colours[status&.key || "draft"]["border"] %>;
+    --status-text-color: <%= status_colours[status&.key || "draft"]["text"] %>;
+  "
+>
   <%= status&.title || "Draft" %>
 </div>

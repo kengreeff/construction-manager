@@ -1,8 +1,8 @@
 <% 
   project_items = project_space.project_items
-    .joins(:category)
-    .includes(:category, :supplier)
-    .order("categories.title ASC")
+    .left_joins(:category, :status, :supplier)
+    .includes(:category, :status, :supplier)
+    .order("statuses.sort DESC")
 
   total = project_items.where(status: Status.find_by(key: "approved")).reduce(0) do |acc, project_item|
     if project_item.quantity && project_item.unit_price.present?

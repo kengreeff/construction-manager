@@ -46,10 +46,10 @@ end
 
 # Statuses
 statuses = [
-  { title: "Approved", key: "approved" },
-  { title: "Draft", key: "draft" },
-  { title: "In Review", key: "in_review" },
-  { title: "Shortlist", key: "shortlist" },
+  { title: "Approved", key: "approved", sort: 100 },
+  { title: "Draft", key: "draft", sort: 0 },
+  { title: "In Review", key: "in_review", sort: 80 },
+  { title: "Shortlist", key: "shortlist", sort: 90 },
 ]
 
 statuses.each do |status|
