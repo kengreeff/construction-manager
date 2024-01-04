@@ -4,12 +4,14 @@
     <a class="text-black dark:text-gray-400" href="<%= projects_path %>">
       Projects
     </a>
-    <a class="text-black dark:text-gray-400" href="<%= clients_path %>">
-      Clients
-    </a>
-    <a class="text-black dark:text-gray-400" href="<%= users_path %>">
-      Team
-    </a>
+      <% if Current.user.organization_user? %>
+      <a class="text-black dark:text-gray-400" href="<%= clients_path %>">
+        Clients
+      </a>
+      <a class="text-black dark:text-gray-400" href="<%= users_path %>">
+        Team
+      </a>
+      <% end %>
     <% end %>
   </nav>
 

@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.role = Role.find_by(key: "user")
+    @user.role = Role.find_by(key: "client_user")
 
     if @user.save
       session_record = @user.sessions.create!

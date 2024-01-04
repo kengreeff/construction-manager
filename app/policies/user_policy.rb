@@ -1,10 +1,14 @@
 class UserPolicy < ApplicationPolicy
   
+  def index?
+    organization_user?
+  end
+
   def create?
     return false if !organization_user?
 
     # Client User
-    if @record.role == Role.find_by(key: "user")
+    if @record.role == Role.find_by(key: "client_user")
       user_client_organization_ids = @record.clients.map { |c| c.organization_id }
       return (@user.organization_ids & user_client_organization_ids).present?
     end
@@ -22,6 +26,8 @@ class UserPolicy < ApplicationPolicy
       elsif @user.organization_user?
         scope.joins(:organizations_users)
           .where(organizations_users: { organization_id: @user.organization_ids })
+      else
+        scope.none
       end
     end
   end

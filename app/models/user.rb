@@ -33,6 +33,10 @@ class User < ApplicationRecord
     self.role&.key == 'admin'
   end
 
+  def client_user?
+    self.role&.key == 'client_user'
+  end
+
   def organization_user?
     self.role&.key == 'organization_user'
   end

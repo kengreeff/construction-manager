@@ -8,6 +8,8 @@ class ProjectSpacePolicy < ApplicationPolicy
           .joins("LEFT JOIN organizations_users ON organizations_users.organization_id =
           organizations_projects.organization_id")
           .where(organizations_users: { user_id: @user.id })
+      else
+        scope.none
       end
     end
   end

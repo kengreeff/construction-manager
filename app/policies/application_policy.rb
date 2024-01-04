@@ -12,6 +12,10 @@ class ApplicationPolicy
     @user.admin?
   end
 
+  def client_user?
+    @user.client_user?
+  end
+
   def organization_user?
     @user.organization_user?
   end

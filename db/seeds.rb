@@ -24,6 +24,7 @@ end
 # Roles
 roles = [
   { title: "Admin", key: "admin" },
+  { title: "Client User", key: "client_user" },
   { title: "Organization User", key: "organization_user" },
   { title: "User", key: "user" },
 ]
