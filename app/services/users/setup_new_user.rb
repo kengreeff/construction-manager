@@ -40,9 +40,5 @@ module Users
         return user
       end
 
-      def send_email_verification(user)
-        UserMailer.with(user: user).email_verification.deliver_later
-      end
-
   end
 end

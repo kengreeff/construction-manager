@@ -6,7 +6,7 @@
       </h3>
 
       <div class="flex items-center text-sm gap-4">
-        <%= link_to "Add User", new_user_path(client_id: client.id, role_id: Role.find_by(key: "user")), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
+        <%= link_to "Add User", new_user_path(client_id: client.id, role_id: Role.find_by(key: "user"), redirect: edit_client_path(client)), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
       </div>
     </div>
 

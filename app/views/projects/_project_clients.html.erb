@@ -12,25 +12,10 @@
     </div>
 
     <% if project.clients.size > 0 %>
-    <div class="relative w-full overflow-auto">
-      <table class="w-full caption-bottom text-sm">
-        <thead class="[&amp;_tr]:border-b">
-          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-              Title
-            </th>
-          </tr>
-        </thead>
-        <tbody class="[&amp;_tr:last-child]:border-0">
-          <% project.clients.each do |client| %>
-          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-            <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
-              <%= link_to client.title, edit_client_path(client) %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% project.clients.each do |client| %>
+      <%= render partial: "clients/client_tile", locals: { client: client } %>
+      <% end %>
     </div>
     <% end %>
   </div>

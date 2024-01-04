@@ -15,4 +15,15 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  class Scope < Scope
+    def resolve
+      if @user.admin?
+        scope.all
+      elsif @user.organization_user?
+        scope.joins(:organizations_users)
+          .where(organizations_users: { organization_id: @user.organization_ids })
+      end
+    end
+  end
+
 end

@@ -1,5 +1,5 @@
 <div class="flex flex-col">
-  <p style="color: green"><%= notice %></p>
+  <%= render partial: "shared/flash_message" %>
 
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
     <div class="p-6 flex flex-row justify-between items-center gap-4">
@@ -22,6 +22,12 @@
               <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
                 Title
               </th>
+              <th class="h-12 px-4 text-right align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Projects
+              </th>
+              <th class="h-12 px-4 text-right align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Users
+              </th>
             </tr>
           </thead>
           <tbody class="[&amp;_tr:last-child]:border-0">
@@ -29,6 +35,12 @@
             <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
               <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
                 <%= link_to client.title, edit_client_path(client) %>
+              </td>
+              <td class="p-4 align-middle text-right [&amp;:has([role=checkbox])]:pr-0">
+                <%= "#{client.projects.count}" %>
+              </td>
+              <td class="p-4 align-middle text-right [&amp;:has([role=checkbox])]:pr-0">
+                <%= "#{client.users.count}" %>
               </td>
             </tr>
             <% end %>

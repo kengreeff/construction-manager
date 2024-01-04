@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = policy_scope(User)
   end
 
   # GET /users/1 or /users/1.json
@@ -38,16 +38,13 @@ class UsersController < ApplicationController
     end
 
     @user = result[:data]
-    
-    puts "### USER"
-    puts @user.to_json
-    puts @user.clients.to_json
-
     authorize @user
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        send_email_verification(@user)
+
+        format.html { redirect_to edit_user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +57,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+        format.html { redirect_to edit_user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -83,6 +80,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def send_email_verification(user)
+      UserMailer.with(user: user).email_verification.deliver_later
     end
 
     # Only allow a list of trusted parameters through.

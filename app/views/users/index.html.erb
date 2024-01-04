@@ -1,14 +1,59 @@
-<p style="color: green"><%= notice %></p>
+<div class="flex flex-col">
+  <%= render partial: "shared/flash_message" %>
 
-<h1>Users</h1>
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm">
+    <div class="p-6 flex flex-row justify-between items-center gap-4">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">
+        Team
+      </h3>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+      <div class="flex items-center text-sm gap-4">
+        <%= link_to "Add User", new_user_path(role_id: Role.find_by(key: "organization_user")), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+    <div class="p-6 flex flex-col gap-4">
+      <div class="relative w-full overflow-auto">
+        <table class="w-full caption-bottom text-sm">
+          <thead class="[&amp;_tr]:border-b">
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Name
+              </th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Phone
+              </th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Email
+              </th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                Role
+              </th>
+            </tr>
+          </thead>
+          <tbody class="[&amp;_tr:last-child]:border-0">
+            <% @users.each do |user| %>
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <td class="p-4 align-middle font-medium">
+                <%= link_to user.full_name, edit_user_path(user) %>
+              </td>
+              <td class="p-4 align-middle ">
+                <%= user.phone || "No Phone" %>
+              </td>
+              <td class="p-4 align-middle ">
+                <%= user.email || "No Email" %>
+              </td>
+              <td class="p-4 align-middle ">
+                <%= user.role&.title %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<%= link_to "New user", new_user_path %>

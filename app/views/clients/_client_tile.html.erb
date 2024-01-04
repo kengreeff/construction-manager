@@ -1,0 +1,20 @@
+<div id="<%= dom_id client %>" class="rounded-lg border bg-white text-card-foreground shadow-sm">
+  <div class="space-y-1.5 p-6 flex flex-col gap-2">
+    <h3 class="text-xl font-semibold leading-none tracking-tight">
+      <%= link_to client.title, edit_client_path(client) %>
+    </h3>
+    
+    <div class="flex flex-col gap-1 text-sm">
+      <% if client.users.size > 0 %>
+        <% client.users.each do |user| %>
+          <div>
+            <span><%= user.full_name %><span>
+            <a href="mailto:<%= user.email %>">(<%= user.email %>)</a>
+          </div>
+        <% end %>
+      <% else %>
+        <h4>No Users</h4>
+      <% end %>
+    </div>
+  </div>
+</div>
