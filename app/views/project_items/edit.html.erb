@@ -14,6 +14,7 @@
       <%= render partial: "project_items/form", locals: {
         categories: Category.where(category_type: "ProjectItem").order(title: :asc),
         project_item: @project_item,
+        project_spaces: @project_item.project.project_spaces.order(title: :asc),
         suppliers: Supplier.all.order(title: :asc),
         statuses: Status.all.order(title: :asc),
       } %>

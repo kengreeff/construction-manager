@@ -1,0 +1,1 @@
+Clowne.default_adapter = :active_record

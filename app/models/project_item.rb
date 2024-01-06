@@ -38,3 +38,10 @@ class ProjectItem < ApplicationRecord
       end
     end
 end
+
+class ProjectItemCloner < Clowne::Cloner
+  finalize do |source, record, params|
+    record.title = "#{source.title} Copy"
+    record.image.attach(source.image.blob) if source.image.attached?
+  end
+end

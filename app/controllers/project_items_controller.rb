@@ -55,6 +55,22 @@ class ProjectItemsController < ApplicationController
     end
   end
 
+  # POST /project_items/1/duplicate or /project_items/1/duplicate.json
+  def duplicate
+    @original_item = ProjectItem.find(params[:project_item_id])
+    @project_item = ProjectItemCloner.call(@original_item).to_record
+
+    respond_to do |format|
+      if @project_item.save
+        format.html { redirect_to project_space_url(@project_item.project_id, @project_item.project_space_id), notice: "Project item was successfully created." }
+        format.json { render :show, status: :created, location: @project_item }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @project_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /project_items/1 or /project_items/1.json
   def destroy
     @project_item.destroy!

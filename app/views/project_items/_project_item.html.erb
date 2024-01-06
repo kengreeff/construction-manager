@@ -33,6 +33,8 @@
 
       <div class="flex items-center text-sm gap-2">
         <%= link_to "Edit", edit_project_space_item_path(project_item.project_id, project_item.project_space_id, project_item.id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border h-7 px-2 py-1" %>
+        <%= button_to("Duplicate", project_item_duplicate_path(project_item_id: project_item.id), method: :post, class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border h-7 px-2 py-1") %>
+        <%= button_to("Delete", project_item_path(id: project_item.id), method: :delete, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border h-7 px-2 py-1") %>
         <%= render partial: "statuses/status_pill", locals: { status: project_item.status } %>
       </div>
     </div>

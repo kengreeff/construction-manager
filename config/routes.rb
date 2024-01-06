@@ -46,7 +46,9 @@ Rails.application.routes.draw do
   end
 
   # Project Items
-  resources :project_items, only: [:create, :update]
+  resources :project_items, only: [:create, :destroy, :update] do
+    post :duplicate
+  end
 
   # Quotes
   resources :quotes
