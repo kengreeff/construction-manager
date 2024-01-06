@@ -14,6 +14,10 @@ class Project < ApplicationRecord
   has_many :sub_projects, class_name: 'Project', foreign_key: 'parent_project_id'
   has_many :quotes
 
+  scope :joins_parent_project, -> {
+    joins('LEFT JOIN projects parent_projects ON projects.parent_project_id = parent_projects.id')
+  }
+
   def combined_clients_name
     if self.clients.size > 0
       return self.clients.map { |c| c.title }.join(" / ")

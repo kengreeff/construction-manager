@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <% @project.spaces.each do |project_space| %>
+  <% @project.spaces.order(title: :asc).each do |project_space| %>
   <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
     <div class="p-6 py-4 flex flex-row items-center justify-between">
       <div class="flex flex-col">

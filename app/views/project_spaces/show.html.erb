@@ -3,21 +3,21 @@
 
   <%= render @project_space %>
 
+  <% @categories.each do |category| %>
+  <%= render partial: "project_spaces/category_group", locals: { category: category, project_space: @project_space } %>
+  <% end %>
+
   <% if @project_space.images.size > 0 %>
   <h4 class="text-xl font-semibold leading-none tracking-tight mt-8">
     Inspiration
   </h4>
 
   <div class="rounded border text-card-foreground bg-white shadow-sm mt-4">
-    <div class="border-b grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 p-4 gap-4">
+    <div class="columns-3 md:columns-4 lg:columns-6 p-4">
       <% @project_space.images.each do |image| %>
       <img class="rounded-lg w-full h-full" src="<%= url_for(image) %>" />
       <% end %>
     </div>
   </div>
-  <% end %>
-
-  <% @categories.each do |category| %>
-  <%= render partial: "project_spaces/category_group", locals: { category: category, project_space: @project_space } %>
   <% end %>
 </div>

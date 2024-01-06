@@ -16,7 +16,7 @@
   </div>
 
   <div id="projects" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    <% @projects.each do |project| %>
+    <% @projects.order(updated_at: :asc).each do |project| %>
       <%= render project %>
     <% end %>
   </div>
