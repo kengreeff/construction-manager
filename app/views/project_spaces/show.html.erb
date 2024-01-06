@@ -15,7 +15,7 @@
   <div class="rounded border text-card-foreground bg-white shadow-sm mt-4">
     <div class="columns-3 md:columns-4 lg:columns-6 p-4">
       <% @project_space.images.each do |image| %>
-      <img class="rounded-lg w-full h-full" src="<%= url_for(image) %>" />
+      <img class="rounded-lg w-full h-full mb-4" src="<%= url_for(image) %>" />
       <% end %>
     </div>
   </div>
