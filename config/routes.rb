@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get "spaces/bulk_new", to: "project_spaces#bulk_new"
     post "spaces/bulk_create", to: "project_spaces#bulk_create"
     resources :spaces, controller: "project_spaces" do
+      post :duplicate
       resources :items, controller: "project_items"
     end
 

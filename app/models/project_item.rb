@@ -41,7 +41,12 @@ end
 
 class ProjectItemCloner < Clowne::Cloner
   finalize do |source, record, params|
-    record.title = "#{source.title} Copy"
     record.image.attach(source.image.blob) if source.image.attached?
+  end
+
+  trait :append_copy do
+    finalize do |source, record, params|
+      record.title = "#{source.title} Copy"
+    end
   end
 end

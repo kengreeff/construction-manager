@@ -12,8 +12,9 @@
       </h4>
     </div>
 
-    <div>
-      <%= link_to "Edit Space", edit_project_space_path(project_space.project_id, project_space), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2" %>
+    <div class="flex gap-2">
+      <%= button_to("Duplicate", project_space_duplicate_path(project_space.project_id, space_id: project_space.id), method: :post, class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2") %>
+      <%= link_to("Edit", edit_project_space_path(project_space.project_id, project_space), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2") %>
     </div>
   </div>
 </div>

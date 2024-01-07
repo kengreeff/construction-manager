@@ -75,6 +75,22 @@ class ProjectSpacesController < ApplicationController
     end
   end
 
+  # POST /project_spaces/1/duplicate or /project_spaces/1/duplicate.json
+  def duplicate
+    @original_space = ProjectSpace.find(params[:space_id])
+    @project_space = ProjectSpaceCloner.call(@original_space, traits: :append_copy).to_record
+
+    respond_to do |format|
+      if @project_space.save
+        format.html { redirect_to project_space_url(@project_space.project_id, @project_space.id), notice: "Project item was successfully created." }
+        format.json { render :show, status: :created, location: @project_space }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @project_space.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /project_spaces/1 or /project_spaces/1.json
   def destroy
     @project_space.destroy!

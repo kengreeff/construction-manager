@@ -58,7 +58,7 @@ class ProjectItemsController < ApplicationController
   # POST /project_items/1/duplicate or /project_items/1/duplicate.json
   def duplicate
     @original_item = ProjectItem.find(params[:project_item_id])
-    @project_item = ProjectItemCloner.call(@original_item).to_record
+    @project_item = ProjectItemCloner.call(@original_item, traits: :append_copy).to_record
 
     respond_to do |format|
       if @project_item.save
