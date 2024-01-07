@@ -96,7 +96,7 @@ class ProjectSpacesController < ApplicationController
     @project_space.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_spaces_url, notice: "Project space was successfully destroyed." }
+      format.html { redirect_to project_url(@project_space.project_id), notice: "Project space was successfully deleted." }
       format.json { head :no_content }
     end
   end

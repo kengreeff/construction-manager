@@ -62,7 +62,7 @@ class QuotesController < ApplicationController
     @quote.destroy!
 
     respond_to do |format|
-      format.html { redirect_to quotes_url, notice: "Quote was successfully destroyed." }
+      format.html { redirect_to quotes_url, notice: "Quote was successfully deleted." }
       format.json { head :no_content }
     end
   end

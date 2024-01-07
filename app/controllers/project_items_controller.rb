@@ -76,7 +76,7 @@ class ProjectItemsController < ApplicationController
     @project_item.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_items_url, notice: "Project item was successfully destroyed." }
+      format.html { redirect_to project_items_url, notice: "Project item was successfully deleted." }
       format.json { head :no_content }
     end
   end
