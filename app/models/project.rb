@@ -2,6 +2,10 @@ class Project < ApplicationRecord
   alias_attribute :items, :project_items
   alias_attribute :spaces, :project_spaces
 
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [500, 340]
+  end
+
   belongs_to :parent_project, class_name: 'Project', optional: true
 
   has_many :clients_projects

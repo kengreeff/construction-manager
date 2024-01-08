@@ -17,11 +17,9 @@
         </h4>
       </div>
       
-      <% if Current.user.organization_user? %>
       <div>
         <%= link_to "Edit Project", edit_project_path(@project), class: "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2" %>
       </div>
-      <% end %>
     </div>
   </div>
 

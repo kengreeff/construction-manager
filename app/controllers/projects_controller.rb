@@ -86,6 +86,8 @@ class ProjectsController < ApplicationController
     def project_params
       params.fetch(:project, {})
         .permit(
+          :budget,
+          :image,
           :is_master,
           :parent_project_id,
           :title,

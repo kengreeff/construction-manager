@@ -1,11 +1,17 @@
 <div id="<%= dom_id project %>" class="rounded-lg border bg-white text-card-foreground shadow-sm">
-  <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
+  <div class="h-64 border-b">
+    <%= link_to project do %>
+      <%= image_tag project.image, class: "object-bottom object-cover h-full w-full rounded-t-lg" %>
+    <% end %>
+  </div>
+
+  <div class="space-y-1.5 p-4 flex flex-row items-center">
     <div class="grid gap-1">
-      <h3 class="text-xl font-semibold leading-none tracking-tight">
+      <h3 class="text-lg font-semibold leading-none tracking-tight">
         <%= link_to project.title, project %>
       </h3>
       
-      <h4>
+      <h4 class="text-sm">
         <% if project.is_master %>
           <%= project.combined_clients_name %>
         <% else %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_04_030428) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_225438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -173,6 +173,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_04_030428) do
     t.datetime "updated_at", null: false
     t.boolean "is_master", default: false, null: false
     t.bigint "parent_project_id"
+    t.integer "budget", default: 0
   end
 
   create_table "quotes", force: :cascade do |t|
