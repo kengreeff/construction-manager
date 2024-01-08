@@ -18,6 +18,10 @@ class Project < ApplicationRecord
     joins('LEFT JOIN projects parent_projects ON projects.parent_project_id = parent_projects.id')
   }
 
+  scope :joins_sub_projects, -> {
+    joins('INNER JOIN projects sub_projects ON projects.id = sub_projects.parent_project_id')
+  }
+
   def combined_clients_name
     if self.clients.size > 0
       return self.clients.map { |c| c.title }.join(" / ")

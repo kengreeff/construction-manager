@@ -22,12 +22,12 @@ class ProjectPolicy < ApplicationPolicy
         scope.all
       elsif @user.client_user?
         scope.joins(:clients_projects)
-          .joins("LEFT JOIN clients_users ON clients_users.client_id =
+          .joins("INNER JOIN clients_users ON clients_users.client_id =
           clients_projects.client_id")
           .where(clients_users: { user_id: @user.id })
       elsif @user.organization_user?
         scope.joins(:organizations_projects)
-          .joins("LEFT JOIN organizations_users ON organizations_users.organization_id =
+          .joins("INNER JOIN organizations_users ON organizations_users.organization_id =
           organizations_projects.organization_id")
           .where(organizations_users: { user_id: @user.id })
       end

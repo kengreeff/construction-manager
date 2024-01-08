@@ -16,9 +16,10 @@ class ProjectSpacesController < ApplicationController
   def new
     @project_space = ProjectSpace.new(project_id: params[:project_id])
     @projects = policy_scope(Project)
-      .joins_parent_project
-      .where(is_master: false)
-      .order("parent_projects.title ASC, projects.title ASC")
+      .select("sub_projects.*")
+      .joins_sub_projects
+      .includes(:parent_project)
+      .order("projects.title ASC, sub_projects.title ASC")
   end
 
   # GET /project_spaces/bulk_new
@@ -29,9 +30,10 @@ class ProjectSpacesController < ApplicationController
   # GET /project_spaces/1/edit
   def edit
     @projects = policy_scope(Project)
-      .joins_parent_project
-      .where(is_master: false)
-      .order("parent_projects.title ASC, projects.title ASC")
+      .select("sub_projects.*")
+      .joins_sub_projects
+      .includes(:parent_project)
+      .order("projects.title ASC, sub_projects.title ASC")
   end
 
   # POST /project_spaces or /project_spaces.json

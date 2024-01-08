@@ -16,7 +16,7 @@
       <%= form.label "Project", class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
       <%= form.select(
         :project_id,
-        projects.map { |project| ["#{project.parent_project.title} - #{project.title}", project.id] },
+        projects.map { |project| ["#{project.parent_project&.title} - #{project.title}", project.id] },
         { include_blank: "Please Select..." },
         { class: "appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" }
       ) %>
