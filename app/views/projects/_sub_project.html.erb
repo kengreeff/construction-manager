@@ -23,37 +23,10 @@
     </div>
   </div>
 
-  <% @project.spaces.order(title: :asc).each do |project_space| %>
-  <div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
-    <div class="p-6 py-4 flex flex-row items-center justify-between">
-      <div class="flex flex-col">
-        <h3 class="text-lg font-semibold leading-none tracking-tight">
-          <%= link_to project_space.title, project_space_path(@project, project_space) %>
-        </h3>
-
-        <h4 class="text-sm leading-none tracking-tight mt-2">
-          <%= "#{project_space.project_items.count} " + "Item".pluralize(project_space.project_items.count) %>
-        </h4>
-      </div>
-
-      <a
-        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary border hover:border-gray-300 h-10 px-4 py-2"
-        href="<%= project_space_path(@project, project_space) %>"
-      >
-        Manage
-      </a>
-    </div>
-  </div>
-  <% end %>
+  <%= render partial: "projects/project_spaces", locals: { project: @project } %>
 
   <div class="flex flex-col md:flex-row justify-end rounded-lg border bg-white text-card-foreground shadow-sm mt-4 p-6 gap-2 md:gap-1">
     <%= link_to "Go Back", project_path(@project.master_project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
-    <%= link_to "Bulk Create", project_spaces_bulk_new_path(@project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
-    <a
-      class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-      href="<%= new_project_space_path(@project) %>"
-    >
-      Add a Space
-    </a>
+    <%= link_to "Bulk Create Spaces", project_spaces_bulk_new_path(@project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border text-primary h-10 px-4 py-2 mr-2" %>
   </div>
 </div>

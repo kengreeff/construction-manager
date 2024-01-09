@@ -1,0 +1,36 @@
+<div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+  <div class="space-y-1.5 p-6 flex flex-col gap-4">
+    <div class="flex justify-between">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">
+        Documents
+      </h3>
+
+      <div class="flex items-center text-sm gap-4">
+        <%= link_to "Add Document", new_document_path(project_id: project.id), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
+      </div>
+    </div>
+
+    <% if project.documents.size > 0 %>
+    <div class="relative w-full overflow-auto">
+      <table class="w-full caption-bottom text-sm">
+        <thead class="[&amp;_tr]:border-b">
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[300px]">
+              Title
+            </th>
+          </tr>
+        </thead>
+        <tbody class="[&amp;_tr:last-child]:border-0">
+          <% project.documents.order(created_at: :desc).each do |document| %>
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <td class="p-4 align-middle font-medium">
+              <%= link_to document.title, rails_blob_path(document.original_document, disposition: "attachment") %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
+  </div>
+</div>

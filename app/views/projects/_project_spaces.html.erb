@@ -1,0 +1,46 @@
+<div class="rounded-lg border bg-white text-card-foreground shadow-sm mt-4">
+  <div class="space-y-1.5 p-6 flex flex-col gap-4">
+    <div class="flex justify-between">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">
+        Spaces
+      </h3>
+
+      <div class="flex items-center text-sm gap-4">
+        <%= link_to "Add Space", new_project_space_path(project), class: "cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-7 px-2 py-1" %>
+      </div>
+    </div>
+
+    <% if project.spaces.size > 0 %>
+    <div class="relative w-full overflow-auto">
+      <table class="w-full caption-bottom text-sm">
+        <thead class="[&amp;_tr]:border-b">
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[300px]">
+              Title
+            </th>
+            <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">
+              Item Count
+            </th>
+          </tr>
+        </thead>
+        <tbody class="[&amp;_tr:last-child]:border-0">
+          <% project.spaces.order(title: :asc).each do |project_space| %>
+          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <td class="p-4 align-middle font-medium">
+              <%= link_to project_space.title, project_space_path(project, project_space) %>
+            </td>
+            <td class="p-4 align-middle text-right">
+              <%= pluralize(project_space.project_items.count, "item") %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="self-end">
+      <span class="font-bold">Total:</span> <%= number_to_currency(project.invoices.sum(:total)) %>
+    </div>
+    <% end %>
+  </div>
+</div>

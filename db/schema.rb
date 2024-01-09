@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_08_225438) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_231624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_225438) do
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id"], name: "index_comments_on_record"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_documents_on_project_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -241,6 +251,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_225438) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "documents", "projects"
+  add_foreign_key "documents", "users"
   add_foreign_key "invoices", "projects"
   add_foreign_key "invoices", "quotes"
   add_foreign_key "invoices", "suppliers"

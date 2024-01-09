@@ -10,6 +10,7 @@ class Project < ApplicationRecord
 
   has_many :clients_projects
   has_many :clients, through: :clients_projects
+  has_many :documents
   has_many :invoices
   has_many :organizations_projects
   has_many :organizations, through: :organizations_projects

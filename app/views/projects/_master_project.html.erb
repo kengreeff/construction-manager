@@ -64,6 +64,7 @@
     </div>
   </div>
 
+  <%= render partial: "projects/project_documents", locals: { project: @project } %>
   <%= render partial: "projects/project_quotes", locals: { project: @project } %>
   <%= render partial: "projects/project_invoices", locals: { project: @project } %>
 

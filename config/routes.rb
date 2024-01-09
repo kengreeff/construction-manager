@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users
   # Authentication
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
@@ -25,6 +24,9 @@ Rails.application.routes.draw do
 
   # Comments
   resources :comments, only: [:create, :destroy]
+
+  # Documents
+  resources :documents
 
   # Invoices
   resources :invoices
@@ -53,4 +55,7 @@ Rails.application.routes.draw do
 
   # Quotes
   resources :quotes
+
+  # Users
+  resources :users
 end

@@ -1,7 +1,11 @@
 <div id="<%= dom_id project %>" class="rounded-lg border bg-white text-card-foreground shadow-sm">
-  <div class="h-64 border-b">
-    <%= link_to project do %>
-      <%= image_tag project.image, class: "object-bottom object-cover h-full w-full rounded-t-lg" %>
+  <div class="w-full h-64 border-b bg-gray-50 rounded-t-lg">
+    <%= link_to(project) do %>
+      <% if project.image.attached? %>
+      <%= image_tag(project.image, class: "object-bottom object-cover h-full w-full rounded-t-lg") %>
+      <% else %>
+      <%= image_tag("project_placeholder.png", class: "object-bottom object-cover h-full w-full rounded-t-lg") %>
+      <% end %>
     <% end %>
   </div>
 
