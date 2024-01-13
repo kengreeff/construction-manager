@@ -14,6 +14,7 @@ class Project < ApplicationRecord
   has_many :invoices
   has_many :organizations_projects
   has_many :organizations, through: :organizations_projects
+  has_many :posts
   has_many :project_spaces, dependent: :destroy
   has_many :project_items, through: :project_spaces
   has_many :sub_projects, class_name: 'Project', foreign_key: 'parent_project_id'

@@ -1,46 +1,5 @@
-<%
-  user_letter = comment.user.email.first
-
-  hex_colours = [
-    "#F87171",
-    "#FBBF24",
-    "#34D399",
-    "#60A5FA",
-    "#818CF8",
-    "#A78BFA",
-    "#F472B6",
-    "#FCA5A5",
-    "#FDE68A",
-    "#A7F3D0",
-    "#BFDBFE",
-    "#C4B5FD",
-    "#D4C4FB",
-    "#F87171",
-    "#FBBF24",
-    "#34D399",
-    "#60A5FA",
-    "#818CF8",
-    "#A78BFA",
-    "#F472B6",
-    "#FCA5A5",
-    "#FDE68A",
-    "#A7F3D0",
-    "#BFDBFE",
-    "#C4B5FD",
-    "#D4C4FB",
-  ]
-
-  user_colour_index = user_letter.bytes[0] - 97
-  user_colour = hex_colours[user_colour_index]
-%>
-
 <div id="<%= dom_id comment %>" class="flex gap-4">
-  <div
-    class="flex items-center bg-[--user-colour] justify-center w-8 h-8 bg-gray-200 rounded-full"
-    style="--user-colour: <%= user_colour %>;"
-  >
-    <%= comment.user.email.first.upcase %>
-  </div>
+  <%= render partial: "users/user_avatar", locals: { user: comment.user } %>
 
   <div class="flex flex-col gap-1">
     <div class="flex flex-col">
